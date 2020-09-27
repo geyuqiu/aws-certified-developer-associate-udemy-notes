@@ -711,11 +711,6 @@ Example:
 ![DynamoDB Streams Example](dynamodb_streams_example.png "A Dynamo DB Stream Example")
 
 
-####  22.4.4. <a name='QueryScansExamTips-1'></a>Query & Scans Exam Tips ####
-* A Query operation finds items in a table using only primary key attribute values. You must provide a partition key attribute name and a distinct value to search for.
-* A Scan operation examines every item in the table. By default, a Scan returns all of the data attributes for every item; however you can use the **ProjectionExpression** parameter so that the Scan only returns some of the attributes, rather than all of them.
-* Try to use a query operation over a Scan operation.
-
 ###  22.5. <a name='ReviewExampleCalculations:'></a>Review Example Calculations:
 Question - You have an application that requires to read 10 items of 1KB per second using eventual consistency. What should you set the read throughout to?
 (Size of Read rounded to nearest 4KB chunk / 4 KB) * number of items = read throughput
@@ -1196,12 +1191,6 @@ For example, suppose an alias resource record set for example.com points to an E
 * Given the choice, always choose an Alias Record over a CNAME
     * Allows you to map naked domain name to ELB and you are not charged.
 
-##  36. <a name='L76Route53-RegisterYourDomainLab'></a>L76 Route53 - Register Your Domain Lab
-N/A
-##  37. <a name='L77SetupourEC2Instances'></a>L77 Setup our EC2 Instances
-N/A
-##  38. <a name='L78SimpleRoutingPolicyLab'></a>L78 Simple Routing Policy Lab
-
 ###  38.1. <a name='Route53RoutingPolicies'></a>Route53 Routing Policies
 * Simple
 * Weighted
@@ -1358,13 +1347,6 @@ Process Flow:
 
 ![vpc_trans_peer](vpc_trans_peer.png "vpc_trans_peer")
 
-###  44.6. <a name='ExamTips-1'></a>Exam Tips
-* Think of a VPC as a logical datacenter in AWS
-* Consists of IGW's (Or Virtual Private Gateways), Route Tables, Network Access Control Lists, Subnets, Security Groups
-* 1 Subnet = 1 Availability Zone
-* Security Groups are Stateful, Network Access Control Lists are Stateless
-* NO TRANSITIVE PEERING
-
 ##  45. <a name='L85BuildingOurOwnCustomVPC'></a>L85 Building Our Own Custom VPC
 
 ###  45.1. <a name='YourVPCs'></a>Your VPC's
@@ -1398,8 +1380,6 @@ When VPC is created:
         * Enable auto-assign public IP
         * This means everytime we deploy an EC2 instance into this subnet, it will automatically assign a public IP address to it.
 
-##  46. <a name='L86BuildyourowncustomVPCPart2'></a>L86 Build your own custom VPC Part 2
-N/A
 ##  47. <a name='L87NATInstancesNATGateways'></a>L87 NAT Instances & NAT Gateways
 * Default route table does not have a route out to the internet
 * The non-default route table does have a route out to the internet
@@ -1407,25 +1387,6 @@ N/A
 > NB. NAT instance is an EC2 instance that acts a gateway to the internet.
 
 > NB. NAT Gateway are used in production more so than NAT instances
-
-###  47.1. <a name='ExamTips-NATinstances'></a>Exam Tips - NAT instances
-* When creating a NAT instance, Disable Source/Destination Check on the Instance
-* NAT instance must be in a public subnet
-* One-to-one for subnet to availability zone
-* There must be a route out of the private subnet to the NAT instance, in order for this to work. (also must have public IP address)
-* The amount of traffic that NAT instances supports, depends on the instance size. If you are bottlenecking, increase the instance size.
-* You can create high avaialbility using Autoscaling Groups, multiple subnets in different AZ's and a script to automate failover.
-* Behind a Security GRoup.
-
-###  47.2. <a name='ExamTips-NATGateways'></a>Exam Tips - NAT Gateways
-* Very new, may not be in the exams yet.
-* Preferred by the enterprise.
-* Scale automatically up to 10Gbps
-* No need to patch
-* Not associated with security groups
-* Automatically assigned a public ip address
-* Remember to update your route tables.
-* No need to disable Source/Destination Checks
 
 ##  48. <a name='L88AccessControlListsvs.SecurityGroups'></a>L88 Access Control Lists vs. Security Groups
 
@@ -1440,34 +1401,10 @@ Security
 > NB. One subnet goes to only one network ACL and one availbility zone.
 
 > NB. ACL Rule numbers have numbers in increments of 100 as best practice.
-###  48.2. <a name='ExamTips-NetworkACLs'></a>Exam Tips - Network ACL's
-* Your VPC automatically comes a default network ACL and by default it allows all outbound and inbound traffic.
-* You can create a custom network ACL. By default, each custom network ACL denies all inbound and outbound traffic until you add rules.
-* Each subnet in your VPC must be associated with a network ACL. If you don't explicitly associate a subnet with a network ACL, the subnet us automatically associated with the default network ACL.
-* You can associate a network ACL with multiple subnets; however, a subnet can be associated with only one network ACL at a time. When you associate a network ACL with a subnet, the previous association is removed.
-* A network ACL contains a numbered list of rules that is evaluated in order, starting with the lowest numbered rule.
-* A network ACL has separate inbound and outbound rules, and each rule can either allow or deny traffic.
-* Network ACLs are stateless; responses to allowed inbound traffic are subject to the rules for outbound traffic (and vice versa).
-* Block IP Addresses using network ACL's not Security Groups (can't use security groups).
-
-##  49. <a name='L89CustomVPCsandELBs'></a>L89 Custom VPC's and ELBs
-* You want at least two public (or two private) subnets as a design consideration in case one availability zone goes down
-
-##  50. <a name='L90NATsvs.BastionServers'></a>L90 NAT's vs. Bastion Servers
-* Bastion is used for admin only. Access all your instances through this Bastion.
-
-###  50.1. <a name='ExamTips-NATvs.Bastions'></a>Exam Tips - NAT vs. Bastions
-* A NAT is used to provide internet traffic to EC2 instances in private subnets.
-* A Bastion is used to securely administer EC2 instances (using SSH or RDP) in private subnets. In Australia we call them jump boxes.
 
 ##  51. <a name='L91VPCFlowLogs'></a>L91 VPC Flow Logs
 > NB. This will only be seen in the Sys Exam.
 Flow logs enable you to capture IP traffic flow information for the network interfaces in your resources.
-
-##  52. <a name='L92VPCCleanUp'></a>L92 VPC Clean Up
-N/A
-
-##  53. <a name='L93VPCSummary'></a>L93 VPC Summary
 
 ###  53.1. <a name='BasicExamTips'></a>Basic Exam Tips
 * Think of a VPC as a logical datacenter in AWS
