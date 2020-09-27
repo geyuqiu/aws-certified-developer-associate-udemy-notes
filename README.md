@@ -711,11 +711,6 @@ Example:
 ![DynamoDB Streams Example](dynamodb_streams_example.png "A Dynamo DB Stream Example")
 
 
-####  22.4.4. <a name='QueryScansExamTips-1'></a>Query & Scans Exam Tips ####
-* A Query operation finds items in a table using only primary key attribute values. You must provide a partition key attribute name and a distinct value to search for.
-* A Scan operation examines every item in the table. By default, a Scan returns all of the data attributes for every item; however you can use the **ProjectionExpression** parameter so that the Scan only returns some of the attributes, rather than all of them.
-* Try to use a query operation over a Scan operation.
-
 ###  22.5. <a name='ReviewExampleCalculations:'></a>Review Example Calculations:
 Question - You have an application that requires to read 10 items of 1KB per second using eventual consistency. What should you set the read throughout to?
 (Size of Read rounded to nearest 4KB chunk / 4 KB) * number of items = read throughput
