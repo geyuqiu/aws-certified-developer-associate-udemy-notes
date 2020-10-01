@@ -1554,8 +1554,3 @@ Flow logs enable you to capture IP traffic flow information for the network inte
     * 5GB
 31. You have a motion sensor which writes 300 items of data every 30 seconds. Each item consists of 5kb. Your application uses eventually consistent reads. What should you set the read throughput to?
     * 10
-
-
-
-# Section 17: What's next?
- More certifications!
